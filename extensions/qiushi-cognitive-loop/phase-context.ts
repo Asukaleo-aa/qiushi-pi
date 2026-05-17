@@ -278,23 +278,18 @@ export function generateSelfAssessmentPrompt(phase: CognitivePhase, autoApprove:
 
   const exitChecks = guidance.exitConditions.map((c, i) => `  ${i + 1}. ${c}`).join("\n");
 
-  return `🔄 环节自我评估
+  return `🔄 环节自我评估（必须执行）
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-在完成本轮所有工具调用后，请反思：
+
+你必须在发送最终回复之前，调用 **assess_phase** 工具。这是强制步骤。
 
 1. 当前环节「${label.cn}」的出口条件是否已满足？
 ${exitChecks}
 
-2. 如果满足，调用 **assess_phase** 工具：
-   - ready: true
-   - reasoning: 说明每个条件为什么满足
-   - exitData: 填写出口数据（facts/essence/mainContradiction 等）
-
-3. 如果不满足，调用 **assess_phase** 工具：
-   - ready: false
-   - reasoning: 说明还缺什么
+2. 如果满足，调用 assess_phase(ready: true, reasoning: "...", exitData: {...})
+3. 如果不满足，调用 assess_phase(ready: false, reasoning: "...")
 
 ${modeHint}
 
-⚠️ 重要：每轮结束时必须调用 assess_phase 工具。不要跳过。`;
+⛔ 禁止跳过。如果你完成了回复但没有调用 assess_phase，下一轮会收到警告。`;
 }

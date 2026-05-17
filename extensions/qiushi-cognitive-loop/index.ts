@@ -40,6 +40,15 @@ let cognitiveState: CognitiveState | null = null;
 /** 环节推进模式：false=手动确认，true=自动批准 */
 let autoApproveMode = false;
 
+/** 本轮是否已调用过 assess_phase */
+let assessCalledThisTurn = false;
+
+/** 状态是否有未持久化的变更 */
+let stateDirty = false;
+
+/** 是否需要在下轮注入 assess_phase 提醒（上轮未调用） */
+let remindAssess = false;
+
 // ─── 模型预设自动切换 ───────────────────────────────────
 
 const PHASE_MODEL_PRESET: Record<CognitivePhase, string> = {
@@ -61,8 +70,8 @@ function switchModelForPhase(pi: ExtensionAPI, phase: CognitivePhase): void {
 function doAdvancePhase(pi: ExtensionAPI): CognitivePhase {
   cognitiveState = advancePhase(cognitiveState!);
   const newPhase = cognitiveState.phase;
+  stateDirty = true;
   switchModelForPhase(pi, newPhase);
-  saveState(pi, cognitiveState);
   return newPhase;
 }
 
@@ -92,11 +101,31 @@ export default function (pi: ExtensionAPI) {
   // 2. 每次 Agent 启动前：注入认知环上下文 + 自我评估提示
   // ═══════════════════════════════════════════════════════
 
+  // 监听每轮开始，重置 assess_phase 调用标记
+  pi.on("turn_start", async () => {
+    assessCalledThisTurn = false;
+  });
+
   pi.on("before_agent_start", async (event, ctx) => {
     if (!cognitiveState) return;
 
+    let extraContext = "";
+
+    // 上轮未调用 assess_phase → 注入醒目提醒
+    if (remindAssess) {
+      extraContext = [
+        "",
+        "⚠️⚠️⚠️ 环节评估缺失警告 ⚠️⚠️⚠️",
+        `上轮未调用 assess_phase 工具。当前仍处于「${PHASE_LABELS[cognitiveState.phase].cn}」环节。`,
+        "在本轮完成工作前，必须调用 assess_phase 评估当前环节是否已完成。",
+        "不要跳过这一步——它决定了认知环能否正常流转。",
+        "",
+      ].join("\n");
+      remindAssess = false;
+    }
+
     const phaseContext = generatePhaseContext(cognitiveState, autoApproveMode);
-    event.injectSystemMessage?.(phaseContext);
+    event.injectSystemMessage?.(extraContext + "\n" + phaseContext);
 
     ctx.ui.setStatus("qiushi", formatStatusBar());
     ctx.ui.setWidget("qiushi", buildPhaseWidget());
@@ -133,15 +162,24 @@ export default function (pi: ExtensionAPI) {
   });
 
   // ═══════════════════════════════════════════════════════
-  // 4. 轮次结束：注入自我评估提示
+  // 4. 轮次结束：状态持久化 + assess_phase 遗漏检测
   // ═══════════════════════════════════════════════════════
 
   pi.on("turn_end", async (_event, ctx) => {
     if (!cognitiveState) return;
-    // 自我评估提示已在 before_agent_start 中注入。
-    // LLM 在完成本轮工作后，应调用 assess_phase 工具反思是否需要推进。
+
+    // 只在实际变更时持久化，避免冗余条目
+    if (stateDirty) {
+      await saveState(pi, cognitiveState);
+      stateDirty = false;
+    }
+
+    // 如果本轮未调用 assess_phase，下轮注入提醒
+    if (!assessCalledThisTurn) {
+      remindAssess = true;
+    }
+
     ctx.ui.setStatus("qiushi", formatStatusBar());
-    await saveState(pi, cognitiveState);
   });
 
   // ═══════════════════════════════════════════════════════
@@ -180,6 +218,8 @@ export default function (pi: ExtensionAPI) {
         return { content: [{ type: "text", text: "认知环未初始化" }], details: {} };
       }
 
+      assessCalledThisTurn = true;
+
       const ready = params.ready === true;
       const reasoning = String(params.reasoning ?? "");
 
@@ -194,6 +234,7 @@ export default function (pi: ExtensionAPI) {
       // ── 满足：保存出口数据 ──
       if (params.exitData) {
         applyExitData(cognitiveState, params.exitData);
+        stateDirty = true;
       }
 
       // ── 自动批准模式 ──
@@ -295,9 +336,9 @@ export default function (pi: ExtensionAPI) {
         ctx.ui.notify(`推进到 ${PHASE_LABELS[newPhase].emoji} ${PHASE_LABELS[newPhase].cn}`, "success");
       } else if (sub === "back") {
         cognitiveState = retreatPhase(cognitiveState);
+        stateDirty = true;
         switchModelForPhase(pi, cognitiveState.phase);
         ctx.ui.notify(`回退到 ${PHASE_LABELS[cognitiveState.phase].emoji} ${PHASE_LABELS[cognitiveState.phase].cn}`, "warning");
-        await saveState(pi, cognitiveState);
       } else if (sub === "reset") {
         cognitiveState = {
           ...cognitiveState, phase: "perceive",
@@ -309,16 +350,16 @@ export default function (pi: ExtensionAPI) {
             tasksCompleted: [], milestonesReached: [], deviations: [], deviationDepth: null,
           },
         };
+        stateDirty = true;
         switchModelForPhase(pi, "perceive");
         ctx.ui.notify("认知环已重置到感知环节", "success");
-        await saveState(pi, cognitiveState);
       } else if (sub.startsWith("set ")) {
         const phaseName = sub.slice(4).trim();
         if (VALID_PHASES.includes(phaseName)) {
           cognitiveState = setPhase(cognitiveState, phaseName as CognitivePhase);
+          stateDirty = true;
           switchModelForPhase(pi, cognitiveState.phase);
           ctx.ui.notify(`已设置环节为 ${phaseName}`, "success");
-          await saveState(pi, cognitiveState);
         } else {
           ctx.ui.notify(`无效环节名：${phaseName}。有效值：${VALID_PHASES.join(", ")}`, "error");
         }
@@ -336,8 +377,8 @@ export default function (pi: ExtensionAPI) {
       const d = parseInt(args?.trim() ?? "", 10);
       if (d >= 0 && d <= 4) {
         cognitiveState = setDepth(cognitiveState, d as 0 | 1 | 2 | 3 | 4);
+        stateDirty = true;
         ctx.ui.notify(`深度等级已设置为 ${d}`, "success");
-        await saveState(pi, cognitiveState);
       } else { ctx.ui.notify("深度等级需在 0-4 之间", "error"); }
     },
   });
@@ -351,8 +392,8 @@ export default function (pi: ExtensionAPI) {
       const valid = ["physical", "engineering", "product", "socio-technical"];
       if (valid.includes(h)) {
         cognitiveState = setHierarchy(cognitiveState, h as SystemHierarchy);
+        stateDirty = true;
         ctx.ui.notify(`系统层次已设置为 ${h}`, "success");
-        await saveState(pi, cognitiveState);
       } else { ctx.ui.notify(`无效层次。有效值：${valid.join(", ")}`, "error"); }
     },
   });
