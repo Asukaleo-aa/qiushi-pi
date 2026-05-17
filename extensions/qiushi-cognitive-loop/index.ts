@@ -14,6 +14,7 @@
 
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
+import { Text } from "@earendil-works/pi-tui";
 
 import {
   type CognitiveState,
@@ -286,14 +287,14 @@ export default function (pi: ExtensionAPI) {
 
     renderCall(args, theme, _context) {
       const ready = args.ready ? "✓ 可推进" : "⏸ 继续";
-      return { text: theme.fg("toolTitle", theme.bold("assess_phase ")) + theme.fg("muted", `${ready}`), length: 0 };
+      return new Text(theme.fg("toolTitle", theme.bold("assess_phase ")) + theme.fg("muted", `${ready}`), 0, 0);
     },
 
     renderResult(result, _options, theme, _context) {
       const details = result.details as Record<string, unknown> | undefined;
       const txt = result.content?.[0]?.type === "text" ? result.content[0].text : "";
       const icon = details?.rejected ? theme.fg("warning", "⏸") : details?.ready ? theme.fg("success", "✅") : theme.fg("muted", "⏸");
-      return { text: `${icon} ${txt.slice(0, 80)}`, length: 0 };
+      return new Text(`${icon} ${txt.slice(0, 80)}`, 0, 0);
     },
   });
 
