@@ -135,8 +135,9 @@ const PHASE_GUIDANCE: Record<CognitivePhase, PhaseGuidance> = {
 /**
  * 生成当前环节的完整上下文注入块。
  * 在 before_agent_start 事件中调用，追加到系统提示词。
+ * @param autoApprove 是否自动批准模式（true=模型判断满足即推进，false=弹窗确认）
  */
-export function generatePhaseContext(state: CognitiveState): string {
+export function generatePhaseContext(state: CognitiveState, autoApprove: boolean): string {
   const phase = state.phase;
   const label = PHASE_LABELS[phase];
   const guidance = PHASE_GUIDANCE[phase];
@@ -212,6 +213,11 @@ export function generatePhaseContext(state: CognitiveState): string {
   }
 
   lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
+  // ── 自我评估提示 ──
+  lines.push("");
+  lines.push(generateSelfAssessmentPrompt(state.phase, autoApprove));
+
   return lines.join("\n");
 }
 
@@ -255,4 +261,40 @@ function isExitConditionMet(state: CognitiveState, conditionIndex: number): bool
     default:
       return false;
   }
+}
+
+// ─── 自我评估提示生成 ────────────────────────────────
+
+/**
+ * 生成环节自我评估提示，注入到上下文末尾。
+ * 引导 LLM 在每轮结束后反思是否需要推进环节。
+ */
+export function generateSelfAssessmentPrompt(phase: CognitivePhase, autoApprove: boolean): string {
+  const label = PHASE_LABELS[phase];
+  const guidance = PHASE_GUIDANCE[phase];
+  const modeHint = autoApprove
+    ? "当前为「自动批准」模式：你判断满足条件后调用 assess_phase 工具，环节将自动推进。"
+    : "当前为「手动确认」模式：你调用 assess_phase 工具提议推进，系统会弹窗让用户确认。";
+
+  const exitChecks = guidance.exitConditions.map((c, i) => `  ${i + 1}. ${c}`).join("\n");
+
+  return `🔄 环节自我评估
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+在完成本轮所有工具调用后，请反思：
+
+1. 当前环节「${label.cn}」的出口条件是否已满足？
+${exitChecks}
+
+2. 如果满足，调用 **assess_phase** 工具：
+   - ready: true
+   - reasoning: 说明每个条件为什么满足
+   - exitData: 填写出口数据（facts/essence/mainContradiction 等）
+
+3. 如果不满足，调用 **assess_phase** 工具：
+   - ready: false
+   - reasoning: 说明还缺什么
+
+${modeHint}
+
+⚠️ 重要：每轮结束时必须调用 assess_phase 工具。不要跳过。`;
 }
