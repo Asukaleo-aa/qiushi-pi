@@ -5,8 +5,6 @@ description: |
   常见信号：“数据里噪声太大分不清信号”、“多个信息源互相矛盾该信谁”、“只知道输入输出不知道内部发生了什么”、“需要在运行中持续估算某个看不见的量”、信息到达是流式的需要在线处理而非离线批处理。
   English: Trigger when the internal state of a system cannot be directly observed, information sources are noisy or contradictory, you must infer truth from incomplete data, extract patterns from messy signals, or continuously update beliefs as new evidence arrives.
   来源于：钱学森、宋健《工程控制论》第十四章（随机输入作用下的控制系统）、第十五章（噪声过滤的设计原理）——维纳滤波、卡尔曼滤波、谱分解、信号参数估计、能观性理论。
-license: MIT
-license: MIT
 ---
 
 # 状态估计——系统辨识与信息融合

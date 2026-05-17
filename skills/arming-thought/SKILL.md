@@ -3,8 +3,6 @@ name: arming-thought
 description: |
   触发：在每次新的顶层对话开始时自动调用，用于建立「实事求是」的总原则，并按认知环节为后续任务路由到合适的下游 skill；如果你是被派遣执行单一具体任务的子 agent，则跳过此 skill。
   English: Trigger at the start of each new top-level conversation to establish the core principle of "seeking truth from facts" and route downstream skills by cognitive phase. Skip this skill when you are a delegated sub-agent handling a narrow, concrete task.
-license: MIT
-license: MIT
 ---
 
 > **子 agent：直接跳过此 skill。**

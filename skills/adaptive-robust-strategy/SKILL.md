@@ -1,14 +1,11 @@
 ---
-license: MITname: adaptive-robust-strategy
+name: adaptive-robust-strategy
 description: |
   触发：当系统的环境或内部参数会变化且变化方式不可预知、初始方案在实践中出现失谐需要自校正、需要在没有完整先验知识的情况下找到并维持最优、系统需要长期自主运行且不能频繁人工干预、或设计方案时已知条件不充分但必须开工时调用。
   常见信号：“开始做的时候不了解全貌得边做边调”、“运行一段时间后性能下降需要自校准”、“环境变化太快要自适应”、“不知道最优在哪需要探索”、新领域没有参考方案需要试探前进。
   English: Trigger when the environment or internal parameters change in unpredictable ways, planned actions drift and need self-correction, optimal operating points must be found and maintained without complete prior knowledge, the system must run autonomously over long periods, or you must start execution despite incomplete initial information.
   来源于：钱学森、宋健《工程控制论》第十六章（自寻最优点的控制系统）、第十八章（自镇定和自适应系统）——极值搜索、自行镇定、模型参考自适应、对环境条件的适应。
-license: MIT
-license: MIT
 ---
-license: MIT
 # 自适应系统方法——在不确定中寻找并保持最优
 
 > "进行控制设计时就不需要有关控制系统性质的确切知识，在这里我们采用在控制过程中不断测量的办法来代替预先了解控制性质的要求，这种系统就称为自动寻求最优运转点的控制系统。"
@@ -22,7 +19,6 @@ license: MIT
 **在信息不完备时，放弃一次性完美设计。将方案设计为一个能够在运行中感知、试探、评价、修正的动态过程。钱学森的自适应方法论给出了三条路径：自寻优（不知道最优在哪，通过试探找到它）、自镇定（不知道哪个模式稳定，通过切换找到稳定态）、模型参考（不知道怎么做最好，但知道"对"的样子，向着它调整）。**
 
 ---
-license: MIT
 ## 不适用场景
 
 以下情况**不需要**调用本 skill：
@@ -33,7 +29,6 @@ license: MIT
 - 问题已经完全在模型内——先用 `constrained-optimization` 求解
 
 ---
-license: MIT
 ## 方法论流程
 
 ### 第一步：诊断信息不完备的类型
@@ -137,7 +132,6 @@ license: MIT
 - **自适应曲线**：初期信息少 → 快速试探（探索为主）；后期信息多 → 精细微调（利用为主）
 
 ---
-license: MIT
 ## 强制输出
 
 ```
@@ -166,7 +160,6 @@ license: MIT
 ```
 
 ---
-license: MIT
 ## 黄金法则
 
 1. **信息不完备时不追求一次做对**：设计一个能在运行中自我修正的系统
@@ -176,7 +169,6 @@ license: MIT
 5. **参考模型是锚**：在没有内部模型时，找到一个外部的期望标准作为参照，围绕它做校正
 
 ---
-license: MIT
 ## 常见错误
 
 | 错误 | 正确做法 |
@@ -188,7 +180,6 @@ license: MIT
 | 没有定义"稳定"的标准 | 自行镇定必须先定义：什么范围内的状态是可接受的？什么不算失败？ |
 
 ---
-license: MIT
 ## 与其他 skill 的关系
 
 **认知位置**：修正环（主要）+ 执行环（辅助）。既是对偏差的响应机制，也是执行阶段的在线调节器。

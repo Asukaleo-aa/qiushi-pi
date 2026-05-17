@@ -3,8 +3,6 @@ name: workflows
 description: |
   触发：当你面临的任务明显需要跨认知环节串联多个 skill 时调用；常见信号包括：从零启动新项目、攻坚复杂疑难问题、对已有方案进行迭代优化。此 skill 提供三条标准化工作流，定义 skill 的调用顺序、步骤间的数据传递格式和终止条件。
   English: Trigger when a task requires multiple skills chained across cognitive phases. Use this skill to select a standard workflow that chains skills together and defines handoff between steps.
-license: MIT
-license: MIT
 ---
 
 # 工作流组合

@@ -5,8 +5,6 @@ description: |
   常见信号：需要制定开发计划、任务过多需要编排调度、涉及多团队协作、需要识别关键路径和瓶颈。
   English: Trigger when design is done and validated — transform it into an executable task sequence with dependency analysis, critical path identification, and quality gates.
   来源于：《论系统工程》第1章"组织管理的技术——系统工程"、第2章"组织管理社会主义建设的技术——社会工程"、第29章"聂荣臻同志开创了中国大规模科学技术研制工作的现代化组织管理"、第46章"系统工程在决策中的应用"
-license: MIT
-license: MIT
 ---
 
 # 工程编排与协调

@@ -3,7 +3,6 @@ name: spark-prairie-fire
 description: |
   触发：当你从零起步、资源极少、需要先找到最小可行切入口并建立稳定根据地时调用；常见信号包括 bootstrap、MVP、pilot、first foothold、小团队起步。
   English: Trigger when starting from almost nothing and needing a viable foothold before scaling up. Use this skill to build a durable base, start small, and grow from a validated nucleus instead of scattering effort.
-license: MIT
 ---
 
 # 星火燎原

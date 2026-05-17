@@ -5,8 +5,6 @@ description: |
   常见信号：需要将系统转化为数学模型/代码模型、需要进行优化或预测、需要评估"如果...那么..."的场景。
   English: Trigger to transform qualitative understanding into computable models — from empirical hypotheses to mathematical/code representations.
   来源于：《论系统工程》第1章"组织管理的技术——系统工程"、第2章"组织管理社会主义建设的技术——社会工程"、第8章"用科学方法绘制国民经济现代化的蓝图"、第44章"控制论和系统学"、第47章"工程控制论"
-license: MIT
-license: MIT
 ---
 
 # 定量建模工作流

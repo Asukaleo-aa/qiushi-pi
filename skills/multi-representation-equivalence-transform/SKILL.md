@@ -5,8 +5,6 @@ description: |
   常见信号："这个方程解不出来"、"在这个框架里怎么做都不对"、问题在一个域中复杂但在另一个域中明显简化、需要在几何直观和代数运算之间切换视角。
   English: Trigger when stuck in one mathematical framework, the same problem is discussed repeatedly without progress, or multiple attempts in the same direction fail. Use this skill to identify the current representation, list candidate equivalent representations, switch to the one where the core operation is simplest, solve, and transform back.
   来源于：钱学森、宋健《工程控制论》全书贯穿的算子等价观——"拉氏变换本身只是一个'翻译'的手续"（第2章），同一系统可用传递函数、状态空间、频率特性、希尔伯特空间等价描述。
-license: MIT
-license: MIT
 ---
 
 # 多表述等价变换

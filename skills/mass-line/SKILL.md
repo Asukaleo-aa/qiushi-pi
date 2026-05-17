@@ -3,7 +3,6 @@ name: mass-line
 description: |
   触发：当你需要收集多方意见、把零散反馈整合成可执行方案，或把方案带回真实使用者/执行者验证时调用；常见信号包括 stakeholder input、user feedback、意见汇总、对齐与验证。
   English: Trigger when input must be gathered from many people, synthesized into a clearer plan, and returned to the affected users or executors for validation. Use this skill for a collect-synthesize-validate loop.
-license: MIT
 ---
 
 # 群众路线

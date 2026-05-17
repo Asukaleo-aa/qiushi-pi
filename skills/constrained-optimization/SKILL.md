@@ -5,8 +5,6 @@ description: |
   常见信号：“哪个方案最好”、“如何在有限预算下最大化收益”、“存在多个约束该怎么选”、“瓶颈在哪里怎么绕过去”、需要在离散选项间做最优组合、阶段性决策需要前瞻权衡。
   English: Trigger when choosing the single best option under constraints, optimizing a scarce resource across competing uses, or making sequential decisions where each choice affects future options. Use when there is a clear objective but limited means to achieve it.
   来源于：钱学森、宋健《工程控制论》第八章（最速控制系统设计）、第九章（满足指定积分指标的控制系统设计）——庞特里亚金极大值原理、贝尔曼动态规划、古典变分法的最优控制命题。
-license: MIT
-license: MIT
 ---
 
 # 约束优化——最优决策理论

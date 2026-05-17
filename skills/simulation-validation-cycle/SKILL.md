@@ -5,8 +5,6 @@ description: |
   常见信号：需要在多种场景下测试模型、需要评估边缘情况、需要验证优化方案、需要在决策前进行压力测试。
   English: Trigger when models need validation through simulation before real deployment — scenario testing, edge case evaluation, stress testing.
   来源于：《论系统工程》第43章"作战模拟方法学在中国"、第42章"以理论为依据的需求体制"、第3章"军事系统工程"、第41章"军队现代化与作战理论的发展"
-license: MIT
-license: MIT
 ---
 
 # 仿真验证循环

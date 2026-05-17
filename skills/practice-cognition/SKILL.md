@@ -3,7 +3,6 @@ name: practice-cognition
 description: |
   触发：当你提出了方案、假设或判断，需要通过实践验证、试错迭代或复盘升级认知时调用；常见信号包括 experiment、prototype、validate、iterate、feedback loop。
   English: Trigger when an idea, hypothesis, or plan must be tested in practice and improved through iteration. Use this skill to move from action to understanding and back to action in a spiral learning loop.
-license: MIT
 ---
 
 # 实践认识论

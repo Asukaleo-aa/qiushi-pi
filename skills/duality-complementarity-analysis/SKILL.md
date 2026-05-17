@@ -5,8 +5,6 @@ description: |
   常见信号：一个方向推导不下去、问题有镜像对称性、"正难则反"、需要从输出推断输入、要同时考虑成本和收益。
   English: Trigger when a forward analysis path is blocked, a problem has noticeable symmetric structure, or there's a need to find "another way." Use this skill to explicitly construct the dual system, compare primal vs dual difficulty, solve the easier one, and translate back.
   来源于：钱学森、宋健《工程控制论》全书贯穿的对偶原理——状态↔协态（第8章）、能控↔能观测（第4章）、原系统↔伴随系统（第13章）。
-license: MIT
-license: MIT
 ---
 
 # 对偶互补分析

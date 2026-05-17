@@ -5,8 +5,6 @@ description: |
   常见信号："这个系统为什么会是现在这个样子"、"当初为什么这么设计"、"哪些历史决策在限制今天的选项"、"这个惯性是怎么形成的"、重构老系统前需要理解它的演化路径。
   English: Trigger when understanding how a system became what it is, why certain architectural choices were made, what historical decisions constrain today's options, or when you need to separate contingent legacy from structural necessity. Use before restructuring legacy systems or when facing path-dependent constraints.
   来源于：钱学森《论系统工程》中对系统工程学科发展史的因果追溯方法；《工程控制论》序言中对技术革命从古代指南车到航天时代的历史演化分析——将每个阶段的出现条件、当时解决的主要矛盾、留下的未解决问题串成因果链。
-license: MIT
-license: MIT
 ---
 
 # 历史演化分析——理解系统怎么变成现在这样

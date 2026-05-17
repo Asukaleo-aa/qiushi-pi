@@ -5,8 +5,6 @@ description: |
   常见信号：任务有多个子系统、用户目标模糊需要澄清、需要从整体把握再分解、涉及多个利益相关方或约束条件。
   English: Trigger before substantive work on any complex task. Forces the agent to establish a systems worldview before acting — defining boundaries, components, interactions, and emergent properties.
   来源于：《论系统工程》第4章"系统思想和系统工程"、第38章"系统工程与系统科学的体系"、第50章"系统思想、系统科学和系统论"
-license: MIT
-license: MIT
 ---
 
 # 系统思维框架

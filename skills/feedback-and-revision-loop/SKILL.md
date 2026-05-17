@@ -5,8 +5,6 @@ description: |
   常见信号：阶段完成需要审查、执行结果与预期不符、需要从经验中提炼教训、系统行为出现意外涌现。
   English: Trigger at each stage completion or when deviations occur — the closing feedback loop that enables continuous improvement through structured review.
   来源于：《论系统工程》第28章"关于系统工程与经济管理体制"（认识论的飞跃）、第44章"控制论和系统学"（反馈原理）、第54章"软科学是定性与定量相结合的系统科学"
-license: MIT
-license: MIT
 ---
 
 # 反馈与修正循环

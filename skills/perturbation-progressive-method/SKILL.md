@@ -5,8 +5,6 @@ description: |
   常见信号：问题过于复杂无法一次性求解、需要从简单情形逐步加回复杂因素、迭代优化设计中的逐步精化、线性化近似后需要评估适用范围。
   English: Trigger when a problem is too complex for direct exact solution, engineering approximation is needed with precision requirements, or progressive refinement toward an exact solution is required. Use this skill to solve a simplified "nominal" problem first, treat differences as small perturbations, apply first-order corrections, and evaluate when the perturbation assumption breaks down.
   来源于：钱学森、宋健《工程控制论》第13章"摄动理论和制导系统"、第8章最速控制的轨道摄动法。
-license: MIT
-license: MIT
 ---
 
 # 摄动渐进方法

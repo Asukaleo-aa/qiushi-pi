@@ -5,8 +5,6 @@ description: |
   常见信号：不同来源给出矛盾结论、定性分析与定量结果需要统一、需要从局部结论升华为整体判断、决策前需要整合各方意见。
   English: Trigger when multiple information sources, analyses, or agent outputs need synthesis into a unified judgment. Combines qualitative expertise with quantitative results.
   来源于：《论系统工程》增订版说明（核心方法论）、第46章"软科学是定性与定量相结合的系统科学"、第53章"软科学是新兴的科学技术"
-license: MIT
-license: MIT
 ---
 
 # 综合集成引擎

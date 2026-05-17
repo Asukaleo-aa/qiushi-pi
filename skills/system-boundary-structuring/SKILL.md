@@ -5,8 +5,6 @@ description: |
   常见信号：系统组分超过5个、存在多层级嵌套、接口关系复杂需要明确定义、子系统划分不清晰。
   English: Trigger when fine-grained structural analysis is needed — hierarchical decomposition, interface definition, subsystem partitioning.
   来源于：《论系统工程》第37章"现代科学技术的特点和体系结构"、第21章"现代科学的结构——再论科学技术体系学"、第20章"社会主义的人才系统工程"
-license: MIT
-license: MIT
 ---
 
 # 系统边界与结构分析

@@ -5,8 +5,6 @@ description: |
   常见信号：多个agent同时工作但互相干扰、局部优化导致全局恶化、子系统间有共享资源或公共约束、大系统分解后不知如何协调。
   English: Trigger when a task has 3+ independently executable subtasks with resource competition, constraint conflicts, or need to "divide and conquer then integrate." Use this skill to decompose the whole into subsystems with local controllers, then add a coordination layer that handles coupling without interfering in subsystem internals.
   来源于：钱学森、宋健《工程控制论》第21章"大系统"、第18章"自镇定和自适应系统"中的分散化思想。
-license: MIT
-license: MIT
 ---
 
 # 递阶分解协调

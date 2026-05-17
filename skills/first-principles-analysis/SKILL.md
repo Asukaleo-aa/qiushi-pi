@@ -5,8 +5,6 @@ description: |
   常见信号："这个问题的本质是什么"、"抛开现有方案重新想"、"为什么是这样做而不是那样做"、假设已经堆积太多需要打散重建、需要区分根本约束与偶然约束。
   English: Trigger when facing a genuinely new problem with no analogical precedent, existing frameworks don't apply, or accumulated assumptions need to be stripped away and rebuilt from the ground up. Use this skill to reduce a problem to its most fundamental, irreducible elements and reason upward from there.
   来源于：亚里士多德《形而上学》第一原理概念、笛卡尔《方法论》系统怀疑、钱学森《工程控制论》第1章对系统按方程基本类型的分类法（从第一性分类而非现象分类）。
-license: MIT
-license: MIT
 ---
 
 # 第一性原理分析

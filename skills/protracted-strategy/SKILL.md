@@ -3,7 +3,6 @@ name: protracted-strategy
 description: |
   触发：当目标长期、任务复杂、资源暂时处于劣势，或短期无法速胜但又不能放弃时调用；常见信号包括 long-term effort、phased plan、endurance、战略耐心、需要分阶段推进。
   English: Trigger when the work is long-horizon, difficult, and unlikely to be won quickly. Use this skill to divide the effort into stages, keep strategic confidence, and accumulate small wins into overall victory.
-license: MIT
 ---
 
 # 持久战略

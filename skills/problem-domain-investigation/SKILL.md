@@ -5,8 +5,6 @@ description: |
   常见信号：领域知识不足、信息缺口明显、需要区分已知/未知/推测、需要评估多来源信息的可靠性。
   English: Trigger when entering unfamiliar domains — structured research before forming judgments. Systematic information gathering with reliability assessment.
   来源于：《论系统工程》第25章"社会科学研究的定量方法"、第19章"关于中国系统工程发展的若干侧面"、第8章"用科学方法绘制国民经济现代化的蓝图"
-license: MIT
-license: MIT
 ---
 
 # 问题域调查研究

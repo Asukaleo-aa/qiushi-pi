@@ -3,7 +3,6 @@ name: contradiction-analysis
 description: |
   触发：当问题复杂、存在多个冲突因素、优先级不清，或你不知道应该先解决什么时调用；常见信号包括 trade-off、瓶颈、根因不明、主次不清、多个问题互相牵制。
   English: Trigger when a problem contains competing forces, unclear priorities, or no obvious entry point. Use this skill to identify contradictions, isolate the principal contradiction, classify its nature, and choose the right response.
-license: MIT
 ---
 
 # 矛盾分析法
