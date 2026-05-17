@@ -139,19 +139,19 @@ export interface PhasePermissions {
 
 export const PHASE_PERMISSIONS: Record<CognitivePhase, PhasePermissions> = {
   perceive: {
-    read: "allowed", write: "restricted", edit: "blocked",
+    read: "allowed", write: "blocked", edit: "blocked",
     bash: "restricted",
     bashAllowedPatterns: [/^(ls|cat|head|tail|grep|find|wc|stat|file|which|echo|pwd|whoami|uname|date|env)\b/],
     bashBlockedPatterns: [/rm\s+-rf/, /sudo\b/, />\s*\/dev\//, /mkfs/, /dd\s+if=/],
   },
   understand: {
-    read: "allowed", write: "restricted", edit: "blocked",
+    read: "allowed", write: "blocked", edit: "blocked",
     bash: "restricted",
     bashAllowedPatterns: [/^(ls|cat|head|tail|grep|find|wc|stat|file|which|echo|pwd|git\s+log|git\s+diff|git\s+status)\b/],
     bashBlockedPatterns: [/rm\s+-rf/, /sudo\b/, /git\s+push/, /git\s+commit/, />\s*\/dev\//],
   },
   model: {
-    read: "allowed", write: "allowed", edit: "restricted",
+    read: "allowed", write: "allowed", edit: "blocked",
     bash: "allowed",
     bashBlockedPatterns: [/rm\s+-rf/, /sudo\b/, />\s*\/dev\//],
   },
@@ -173,7 +173,6 @@ export const PHASE_PERMISSIONS: Record<CognitivePhase, PhasePermissions> = {
   correct: {
     read: "allowed", write: "allowed", edit: "allowed",
     bash: "allowed",
-    // 修正环的权限取决于要回退到哪个环节，这里放默认值
   },
 };
 
