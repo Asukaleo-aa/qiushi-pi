@@ -1,0 +1,58 @@
+{
+  "name": "qiushi-pi",
+  "version": "1.1.0",
+  "description": "求是系统工程方法论 —— Pi 编码智能体认知闭环扩展。将毛泽东哲学方法论与钱学森系统工程方法论深度整合为 Pi 运行时行为控制系统，集成交互确认、安全防护、环节传递等官方扩展。",
+  "keywords": ["pi-package", "qiushi", "systems-engineering", "cognitive-loop"],
+  "license": "MIT",
+  "author": "AntiEntropieR",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Asukaleo-aa/qiushi-pi"
+  },
+  "pi": {
+    "extensions": [
+      "./extensions/qiushi-cognitive-loop/index.ts",
+      "./extensions/qiushi-git-checkpoint.ts",
+      "./extensions/qiushi-protected-paths.ts",
+      "./extensions/qiushi-question.ts",
+      "./extensions/qiushi-questionnaire.ts",
+      "./extensions/qiushi-handoff.ts"
+    ],
+    "skills": ["./skills"],
+    "prompts": ["./prompts"],
+    "image": "https://raw.githubusercontent.com/Asukaleo-aa/qiushi-pi/main/docs/demo.png"
+  },
+  "dependencies": {
+    "typebox": "^0.32.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": ">=0.37.3",
+    "@earendil-works/pi-tui": "*",
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-agent-core": "*"
+  },
+  "optionalDependencies": {
+    "pi-web-access": "*",
+    "pi-docparser": "*",
+    "@0xkobold/pi-mcp": "*"
+  },
+  "piMetadata": {
+    "cognitiveLoop": {
+      "phases": ["perceive", "understand", "model", "solve", "execute", "verify", "correct"],
+      "depthLevels": [0, 1, 2, 3, 4],
+      "hierarchies": ["physical", "engineering", "product", "socio-technical"],
+      "totalSkills": 28
+    },
+    "integratedExtensions": {
+      "safety": ["qiushi-protected-paths", "qiushi-git-checkpoint"],
+      "interaction": ["qiushi-question", "qiushi-questionnaire", "qiushi-handoff"],
+      "cognitiveCore": ["qiushi-cognitive-loop"]
+    },
+    "recommendedCompanions": {
+      "localBrowser": "browser-tools (pi-skills)",
+      "webFetch": "pi-web-access (fetch_content only)",
+      "documents": "pi-docparser",
+      "mcpAdapter": "@0xkobold/pi-mcp"
+    }
+  }
+}
