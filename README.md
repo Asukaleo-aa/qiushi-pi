@@ -73,6 +73,22 @@ pi install npm:@0xkobold/pi-mcp
 | `qiushi-questionnaire` | Pi 官方 example 吸入 | 多问题 Tab 切换，建模/执行环节的结构化确认 |
 | `qiushi-handoff` | Pi 官方 example 吸入 + qiushi 改造 | 环节间上下文浓缩传递，自动注入认知状态（本质、主要矛盾、解） |
 
+### 模型智能切换
+
+环节推进时自动切换模型和思考强度，充分利用 DeepSeek 的 reasoning_effort=max。
+
+| 环节 | 模型 | 思考强度 | 理由 |
+|------|------|---------|------|
+| 感知 | V4 Flash | xhigh (→max) | 大量读取搜索，速度优先 |
+| 理解 | V4 Pro | xhigh (→max) | 第一性分析、矛盾识别，需要强推理 |
+| 建模 | V4 Pro | xhigh (→max) | 系统思维、边界界定 |
+| 求解 | V4 Pro | xhigh (→max) | 最优控制、数学推导 |
+| 执行 | V4 Flash | xhigh (→max) | 代码生成和文件操作 |
+| 校验 | V4 Flash | xhigh (→max) | 偏差比较 |
+| 修正 | V4 Pro | xhigh (→max) | 根因分析与决策 |
+
+**配置**：将 `qiushi-presets.example.json` 复制到 `~/.pi/agent/presets.json`（全局）或 `.pi/presets.json`（项目级），环节推进时自动触发 `/preset qiushi-{环节}` 切换。
+
 ### 推荐配套（独立安装）
 
 | 包 | 用途 | 对应 qiushi 环节 |

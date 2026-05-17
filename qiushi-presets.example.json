@@ -1,0 +1,30 @@
+{
+  "qiushi-perceive": {
+    "model": "deepseek/deepseek-v4-flash",
+    "thinkingLevel": "xhigh"
+  },
+  "qiushi-understand": {
+    "model": "deepseek/deepseek-v4-pro",
+    "thinkingLevel": "xhigh"
+  },
+  "qiushi-model": {
+    "model": "deepseek/deepseek-v4-pro",
+    "thinkingLevel": "xhigh"
+  },
+  "qiushi-solve": {
+    "model": "deepseek/deepseek-v4-pro",
+    "thinkingLevel": "xhigh"
+  },
+  "qiushi-execute": {
+    "model": "deepseek/deepseek-v4-flash",
+    "thinkingLevel": "xhigh"
+  },
+  "qiushi-verify": {
+    "model": "deepseek/deepseek-v4-flash",
+    "thinkingLevel": "xhigh"
+  },
+  "qiushi-correct": {
+    "model": "deepseek/deepseek-v4-pro",
+    "thinkingLevel": "xhigh"
+  }
+}

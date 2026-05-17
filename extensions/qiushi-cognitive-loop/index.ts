@@ -36,6 +36,28 @@ import { checkToolPermission, formatBlockNotification } from "./constraint-engin
 
 let cognitiveState: CognitiveState | null = null;
 
+// ─── 模型预设自动切换 ───────────────────────────────────
+
+/** 环节→模型映射。Flash 用于感知/执行/校验，Pro 用于理解/建模/求解/修正。 */
+const PHASE_MODEL_PRESET: Record<CognitivePhase, string> = {
+  perceive:    "deepseek/deepseek-v4-flash",
+  understand:  "deepseek/deepseek-v4-pro",
+  model:       "deepseek/deepseek-v4-pro",
+  solve:       "deepseek/deepseek-v4-pro",
+  execute:     "deepseek/deepseek-v4-flash",
+  verify:      "deepseek/deepseek-v4-flash",
+  correct:     "deepseek/deepseek-v4-pro",
+};
+
+/** 思考强度统一为 xhigh（→ DeepSeek max）。 */
+const DEFAULT_THINKING = "xhigh";
+
+function switchModelForPhase(pi: ExtensionAPI, phase: CognitivePhase): void {
+  const model = PHASE_MODEL_PRESET[phase];
+  // 先尝试 qiushi preset（如果用户配了 qiushi-presets.json）
+  pi.sendUserMessage(`/preset qiushi-${phase}`, { deliverAs: "steering" });
+}
+
 // ─── 入口 ───────────────────────────────────────────────
 
 export default function (pi: ExtensionAPI) {
@@ -154,6 +176,7 @@ export default function (pi: ExtensionAPI) {
         showFullStatus(ctx, cognitiveState);
       } else if (sub === "advance") {
         cognitiveState = advancePhase(cognitiveState);
+        switchModelForPhase(pi, cognitiveState.phase);
         ctx.ui.notify(
           `推进到 ${PHASE_LABELS[cognitiveState.phase].emoji} ${PHASE_LABELS[cognitiveState.phase].cn}`,
           "success",
@@ -161,6 +184,7 @@ export default function (pi: ExtensionAPI) {
         await saveState(pi, cognitiveState);
       } else if (sub === "back") {
         cognitiveState = retreatPhase(cognitiveState);
+        switchModelForPhase(pi, cognitiveState.phase);
         ctx.ui.notify(
           `回退到 ${PHASE_LABELS[cognitiveState.phase].emoji} ${PHASE_LABELS[cognitiveState.phase].cn}`,
           "warning",
@@ -180,12 +204,14 @@ export default function (pi: ExtensionAPI) {
           },
         };
         ctx.ui.notify("认知环已重置到感知环节", "success");
+        switchModelForPhase(pi, "perceive");
         await saveState(pi, cognitiveState);
       } else if (sub.startsWith("set ")) {
         const phaseName = sub.slice(4).trim();
         const validPhases = ["perceive", "understand", "model", "solve", "execute", "verify", "correct"];
         if (validPhases.includes(phaseName)) {
           cognitiveState = setPhase(cognitiveState, phaseName as CognitivePhase);
+          switchModelForPhase(pi, cognitiveState.phase);
           ctx.ui.notify(`已设置环节为 ${phaseName}`, "success");
           await saveState(pi, cognitiveState);
         } else {
