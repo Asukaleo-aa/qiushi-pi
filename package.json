@@ -23,7 +23,7 @@
     "image": "https://raw.githubusercontent.com/Asukaleo-aa/qiushi-pi/main/docs/demo.png"
   },
   "dependencies": {
-    "typebox": "^0.32.0"
+    "typebox": "^1.1.24"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": ">=0.37.3",

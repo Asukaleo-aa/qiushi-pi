@@ -19,8 +19,11 @@
 ## 安装
 
 ```bash
-# 从 GitHub 安装
-pi install git:github.com/Asukaleo-aa/qiushi-pi
+# 从 GitHub 安装（直接 HTTPS URL，不需要 git: 前缀）
+pi install https://github.com/Asukaleo-aa/qiushi-pi
+
+# 或者用 git: 格式（必须带 @分支名）
+pi install git:github.com/Asukaleo-aa/qiushi-pi@main
 
 # 本地开发安装
 pi install ./qiushi-pi
